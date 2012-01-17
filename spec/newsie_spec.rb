@@ -1,7 +1,7 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'spec_helper'
 
-describe "Newsie" do
-  it "fails" do
-    fail "hey buddy, you should probably rename this file and start specing for real"
+describe Newsie do
+  it "should be valid" do
+    Newsie.should be_a(Module)
   end
 end

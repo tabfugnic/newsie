@@ -1,0 +1,2 @@
+module Newsie
+end
