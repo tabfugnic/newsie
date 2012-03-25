@@ -1,0 +1,21 @@
+<ul class="event-list">
+  <% @events.each do |team_member| %>
+  <li class="event">
+    <span class="event-name">
+      <%= @event.name %>
+    </span>
+    <span class="event-name">
+      <%= @event.name %>
+    </span>
+    <span class="event-content">
+      <%= @event.content %>
+    </span>
+    <span class="event-start-date">
+      <%= @event.start_date %>
+    </span>
+    <span class="event-end-date">
+      <%= @event.end_date %>
+    </span>
+  </li>
+  <% end %>
+</ul>

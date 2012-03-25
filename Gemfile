@@ -5,7 +5,6 @@ gem "sqlite3"
 group :development do
   gem "capybara"
   gem "rspec-rails"
-  gem "factory_girl_rails"
   gem "bundler"
   gem "jeweler"
   gem "simplecov"
