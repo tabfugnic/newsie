@@ -1,4 +1,4 @@
-class CreateNewsie < ActiveRecord::Migration
+class CreateNewsieTables < ActiveRecord::Migration
   def self.up
     create_table :event do |t|
       t.string   :name
