@@ -1,6 +1,6 @@
 class CreateNewsieTables < ActiveRecord::Migration
   def self.up
-    create_table :event do |t|
+    create_table :events do |t|
       t.string   :name
       t.datetime :start_date
       t.datetime :end_date
@@ -11,6 +11,6 @@ class CreateNewsieTables < ActiveRecord::Migration
   end
   
   def self.down
-    drop_table :event
+    drop_table :events
   end
 end
