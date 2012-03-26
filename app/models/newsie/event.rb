@@ -1,10 +1,9 @@
 module Newsie
   class Event < ActiveRecord::Base
     attr_accessible :name, :content, :start_date, :end_date, :dismiss
+    validates_presence_of :name
     # Search all events to see if any fit within date range
     def self.extra_extra 
-      p all
-      p Time.now()
       where("start_date <= #{Time.now().to_date} AND end_date >= #{Time.now().to_date}")
     end
     def self.event_today?
