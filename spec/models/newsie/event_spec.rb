@@ -8,15 +8,19 @@ module Newsie
     it { event.should be_valid }
     context "methods" do
       context "extra_extra" do
-        it { Event.extra_extra.should eq("Content 0") }
+        before(:each) { FactoryGirl.create(:event) }
+        it "returns any event happening today" do 
+          Event.extra_extra.length.should be > 0
+        end
+        it "returns no events" do
+          FactoryGirl.create(:event, :start_date => DateTime.current - 2.days, :end_date => DateTime.current - 1.day)
+          Event.extra_extra.should be_empty()
+        end
       end
       context "event_today" do
+        before(:each) { FactoryGirl.build(:event) }
         it { Event.event_today?.should eq(true) }
         it "has no event today" do
-          Event.all.each do |e|
-            e.start_date = Time.now() - (60*60*24*2) #two day ago
-            e.end_date = Time.now()  - (60*60*24) #one day ago
-          end
           Event.event_today?.should eq(false)
         end
       end
