@@ -4,10 +4,10 @@ module Newsie
     validates_presence_of :name
     # Search all events to see if any fit within date range
     def self.extra_extra
-      return where("start_date <= #{Time.now().to_date} AND end_date >= #{Time.now().to_date}")
+      return where("start_date <= ? AND end_date >= ?", Time.now().to_date, Time.now().to_date)
     end
     def self.event_today?
-      return true if where("start_date <= #{Time.now().to_date} AND end_date >= #{Time.now().to_date}").count > 0
+      return true if where("start_date <= ? AND end_date >= ?", Time.now().to_date, Time.now().to_date).count > 0
       return false
     end
   end

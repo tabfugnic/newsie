@@ -12,15 +12,18 @@ module Newsie
         it "returns any event happening today" do 
           Event.extra_extra.length.should be > 0
         end
-        it "returns no events" do
-          FactoryGirl.create(:event, :start_date => DateTime.current - 2.days, :end_date => DateTime.current - 1.day)
-          Event.extra_extra.should be_empty()
+        it "does not return events not happening today" do
+          event = FactoryGirl.create(:event, :start_date => DateTime.current - 2.days, :end_date => DateTime.current - 1.day)
+          Event.extra_extra.should_not include(event)
         end
       end
-      context "event_today" do
-        before(:each) { FactoryGirl.build(:event) }
+      context "event_today?" do
+        before(:each) { @event = FactoryGirl.create(:event) }
         it { Event.event_today?.should eq(true) }
         it "has no event today" do
+          @event.start_date = DateTime.current - 2.days
+          @event.end_date = DateTime.current - 1.days
+          @event.save!
           Event.event_today?.should eq(false)
         end
       end
