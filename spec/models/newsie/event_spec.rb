@@ -8,7 +8,7 @@ module Newsie
     it { event.should be_valid }
     context "methods" do
       context "extra_extra" do
-        before(:all) { FactoryGirl.create(:event) }
+        before(:all) { @event = FactoryGirl.create(:event) }
         it "returns any event happening today" do 
           Event.extra_extra.length.should be > 0
         end
@@ -33,8 +33,9 @@ module Newsie
         before(:all) do
           @event = FactoryGirl.create(:event)
           FactoryGirl.create(:event, :start_date => Time.now().to_date + 1.day, :end_date => Time.now().to_date + 2.days)
-          FactoryGirl.create(:event, :start_date => Time.now().to_date + 1.day, :end_date => Time.now().to_date + 2.days)
+          FactoryGirl.create(:event, :start_date => Time.now().to_date - 2.day, :end_date => Time.now().to_date + 2.days)
         end
+        it { Event.just_in.should eq(@event) }
       end
     end
   end
