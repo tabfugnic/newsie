@@ -13,11 +13,11 @@ module Newsie
     end
     # Return any event today with without a start_date or end_date
     def self.just_in
-      return where("start_date = NULL AND end_date = NULL AND created_at >= ?", Time.now().to_date).sort_by(:created_at).last
+      return where("start_date = NULL AND end_date = NULL AND created_at >= ?", Time.now().to_date).sort_by { |t| t.created_at }.last
     end
     # Return the most current event from today
     def self.most_current
-      return self.extra_extra.sort_by(:start_date).last
+      return self.extra_extra.sort_by { |t| t.start_date }.last
     end
   end
 end

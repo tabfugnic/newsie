@@ -30,12 +30,19 @@ module Newsie
         end
       end
       context "just_in" do
+        before(:each) do
+          @event = FactoryGirl.create(:event, :start_date => nil, :end_date => nil )
+          FactoryGirl.create(:event, :start_date => nil, :end_date => nil, :created_at => Time.now().to_datetime - 10.minutes)
+        end
+        it { Event.just_in.should eq(@event) }
+      end
+      context "most_current" do
         before(:all) do
           @event = FactoryGirl.create(:event)
           FactoryGirl.create(:event, :start_date => Time.now().to_date + 1.day, :end_date => Time.now().to_date + 2.days)
           FactoryGirl.create(:event, :start_date => Time.now().to_date - 2.day, :end_date => Time.now().to_date + 2.days)
         end
-        it { Event.just_in.should eq(@event) }
+        it { Event.most_current.should eq(@event) }
       end
     end
   end
