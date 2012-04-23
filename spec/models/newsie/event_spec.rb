@@ -36,7 +36,7 @@ module Newsie
       context "just_in" do
         before(:each) do
           @event = FactoryGirl.create(:event, :start_date => nil, :end_date => nil )
-          FactoryGirl.create(:event, :start_date => nil, :end_date => nil, :created_at => Time.now.to_datetime - 10.minutes)
+          FactoryGirl.create(:event, :start_date => nil, :end_date => nil, :created_at => Time.now - 10.minutes)
         end
         it { Event.just_in.should eq(@event) }
       end
