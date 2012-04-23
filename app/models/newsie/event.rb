@@ -21,7 +21,7 @@ module Newsie
     
     # Return an event happening right now that started most recently
     def self.most_current
-      return self.extra_extra.sort_by { |t| t.start_date }.last
+      return self.extra_extra.order('start_date DESC').first
     end
   end
 end
