@@ -17,7 +17,6 @@ module Newsie
           @event.start_date = Time.now.to_datetime - 2.days
           @event.end_date = Time.now.to_datetime - 1.days
           @event.save!
-          p @event
           Event.extra_extra.should_not include(event)
         end
       end
@@ -35,8 +34,8 @@ module Newsie
 
       context "just_in" do
         before(:each) do
-          @event = FactoryGirl.create(:event, :start_date => nil, :end_date => nil )
-          FactoryGirl.create(:event, :start_date => nil, :end_date => nil, :created_at => Time.now - 10.minutes)
+          FactoryGirl.create(:event)
+          @event = FactoryGirl.create(:event)
         end
         it { Event.just_in.should eq(@event) }
       end

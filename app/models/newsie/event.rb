@@ -14,12 +14,12 @@ module Newsie
       return where("start_date <= ? AND end_date >= ?", Time.now, Time.now).count > 0
     end
     
-    # Return a one off event, currently denoted by no start date and end date and created within the past day
+    # Return most recently added event
     def self.just_in
-      return where( "start_date == nil AND end_date == nil AND created_at >= ?", Time.now - 1.day )
+      return where( 'created_at <= ?', Time.now ).order('created_at DESC').first
     end
     
-    # Return a one off event, the most current event  started most recently
+    # Return an event happening right now that started most recently
     def self.most_current
       return self.extra_extra.sort_by { |t| t.start_date }.last
     end
