@@ -23,5 +23,6 @@ module Newsie
     def self.most_current
       return self.extra_extra.order('start_date DESC').first
     end
+
   end
 end
