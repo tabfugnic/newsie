@@ -6,8 +6,13 @@ module Newsie
   describe Event do
     let(:event) { mock_model Event }
     it { event.should be_valid }
-    context "methods" do
-
+    context "class methods" do
+      
+      context "find" do
+        before(:each) { @event = FactoryGirl.create(:event, :name => "your_event").3.times.last }
+        it { Event.find("your_event").length.should be > 1 }
+        it { Event.find(@event.id).should eq @event
+      end 
       context "extra_extra" do
         before(:each) { @event = FactoryGirl.create(:event) }
         it "returns events happening right now" do 
@@ -17,7 +22,7 @@ module Newsie
           @event.start_date = Time.now.to_datetime - 2.days
           @event.end_date = Time.now.to_datetime - 1.days
           @event.save!
-          Event.extra_extra.should_not include(event)
+          Event.extra_extra.should_not include(@event)
         end
       end
 
