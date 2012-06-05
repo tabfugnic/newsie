@@ -5,8 +5,12 @@ module Newsie
     validates_presence_of :name
 
     # Using find, return all events by name, otherwise return individual event by id
-    def self.find
-
+    def self.find(event)
+      if event.is_a? String
+        Event.find_all_by_name(event)
+      else
+        super
+      end
     end
     
     # Return all events happening right now
