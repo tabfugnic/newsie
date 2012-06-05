@@ -9,9 +9,9 @@ module Newsie
     context "class methods" do
       
       context "find" do
-        before(:each) { @event = FactoryGirl.create(:event, :name => "your_event").3.times.last }
+        before(:each) { @event = 3.times { |t| FactoryGirl.create(:event, :name => "your_event") }.last }
         it { Event.find("your_event").length.should be > 1 }
-        it { Event.find(@event.id).should eq @event
+        it { Event.find(@event.id).should eq @event }
       end 
       context "extra_extra" do
         before(:each) { @event = FactoryGirl.create(:event) }
