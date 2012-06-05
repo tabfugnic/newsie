@@ -7,11 +7,11 @@ module Newsie
     let(:event) { mock_model Event }
     it { event.should be_valid }
     context "class methods" do
-      
+
       context "find" do
-        before(:each) { @event = 3.times { |t| FactoryGirl.create(:event, :name => "your_event") }.last }
-        it { Event.find("your_event").length.should be > 1 }
-        it { Event.find(@event.id).should eq @event }
+        before(:each) { 3.times { |t| @event = FactoryGirl.create(:event, :name => "your_event") } }
+        it { Event.find("your_event").length.should eq(4) }
+        it { Event.find(@event.id).should eq(@event) }
       end 
       context "extra_extra" do
         before(:each) { @event = FactoryGirl.create(:event) }
