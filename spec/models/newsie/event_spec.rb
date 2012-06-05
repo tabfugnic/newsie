@@ -13,36 +13,36 @@ module Newsie
         it { Event.find("your_event").length.should eq(3) }
         it { Event.find(@event.id).should eq(@event) }
       end 
-      context "extra_extra" do
+      context "now" do
         before(:each) { @event = FactoryGirl.create(:event) }
         it "returns events happening right now" do 
-          Event.extra_extra.length.should be > 0
+          Event.now.length.should be > 0
         end
         it "does not have any events to return right now" do
           @event.start_date = Time.now.to_datetime - 2.days
           @event.end_date = Time.now.to_datetime - 1.days
           @event.save!
-          Event.extra_extra.should_not include(@event)
+          Event.now.should_not include(@event)
         end
       end
 
-      context "extra_extra?" do
+      context "now?" do
         before(:each) { @event = FactoryGirl.create(:event) }
-        it { Event.extra_extra?.should eq(true) }
+        it { Event.now?.should eq(true) }
         it "has no event today" do
           @event.start_date = Time.now.to_datetime - 2.days
           @event.end_date = Time.now.to_datetime - 1.days
           @event.save!
-          Event.extra_extra?.should eq(false)
+          Event.now?.should eq(false)
         end
       end
 
-      context "just_in" do
+      context "recently_added" do
         before(:each) do
           FactoryGirl.create(:event)
           @event = FactoryGirl.create(:event)
         end
-        it { Event.just_in.should eq(@event) }
+        it { Event.recently_added.should eq(@event) }
       end
 
       context "most_current" do

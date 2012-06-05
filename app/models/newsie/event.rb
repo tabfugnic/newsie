@@ -5,6 +5,8 @@ module Newsie
     validates_presence_of :name
 
     # Using find, return all events by name, otherwise return individual event by id
+    # The thought is that you will typically be using it as multiple events.
+    # TODO: Change this so we search for each event by name.
     def self.find(event)
       if event.is_a? String
         Event.find_all_by_name(event)
@@ -14,23 +16,23 @@ module Newsie
     end
     
     # Return all events happening right now
-    def self.extra_extra
+    def self.now
       return where("start_date <= ? AND end_date >= ?", Time.now, Time.now)
     end
     
     # Check to see if any events are happening right now
-    def self.extra_extra?
+    def self.now?
       return where("start_date <= ? AND end_date >= ?", Time.now, Time.now).count > 0
     end
     
     # Return most recently added event
-    def self.just_in
+    def self.recently_added
       return where( 'created_at <= ?', Time.now ).order('created_at DESC').first
     end
     
     # Return an event happening right now that started most recently
     def self.most_current
-      return self.extra_extra.order('start_date DESC').first
+      return self.now.order('start_date DESC').first
     end
 
   end
