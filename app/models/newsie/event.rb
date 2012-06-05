@@ -3,6 +3,11 @@ module Newsie
     
     attr_accessible :name, :content, :start_date, :end_date, :dismiss
     validates_presence_of :name
+
+    # Using find, return all events by name, otherwise return individual event by id
+    def self.find
+
+    end
     
     # Return all events happening right now
     def self.extra_extra
