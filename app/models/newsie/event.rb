@@ -36,7 +36,10 @@ module Newsie
       return self.now.order('start_date DESC').first
     end
     
-    #
+    # Check if event is happening right now
+    def now?
+      start_date <= Time.now and end_date >= Time.now
+    end
 
   end
 end
