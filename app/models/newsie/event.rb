@@ -3,6 +3,7 @@ module Newsie
     
     attr_accessible :name, :content, :start_date, :end_date, :dismiss
     validates_presence_of :name
+    validates_uniqueness_of :name
 
     # Using find, return all events by name, otherwise return individual event by id in an array
     # The thought is that you will typically be using it as multiple events.
