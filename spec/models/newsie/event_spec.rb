@@ -57,5 +57,11 @@ module Newsie
         it { Event.most_current.should eq(@event) }
       end
     end
+    context "instance variables" do
+      context "now?" do
+        before(:each) { @event = FactoryGirl.create(:event, :start_date => Time.now.to_datetime - 1.day, :end_date => Time.now.to_datetime + 1.day) }
+        it { @event.now?.should be(true) }
+      end
+    end
   end
 end
