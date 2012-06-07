@@ -4,12 +4,12 @@ module Newsie
     attr_accessible :name, :content, :start_date, :end_date, :dismiss
     validates_presence_of :name
 
-    # Using find, return all events by name, otherwise return individual event by id
+    # Using find, return all events by name, otherwise return individual event by id in an array
     # The thought is that you will typically be using it as multiple events.
     # TODO: Change this so we search for each event by name.
     def self.find(event)
       if event.is_a? String
-        Event.find_all_by_name(event)
+        Event.find_by_name(event)
       else
         super
       end
@@ -34,6 +34,8 @@ module Newsie
     def self.most_current
       return self.now.order('start_date DESC').first
     end
+    
+    #
 
   end
 end
