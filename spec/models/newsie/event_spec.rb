@@ -62,6 +62,19 @@ module Newsie
         before(:each) { @event = FactoryGirl.create(:event, :start_date => Time.now.to_datetime - 1.day, :end_date => Time.now.to_datetime + 1.day) }
         it { @event.now?.should be(true) }
       end
+      context "content" do
+        before(:each) { @event = FactoryGirl.create(:event) }
+        it "stores hash as json object" do
+          thash = {:some_object => "content", :no_way => "lucky"}
+          @event.content = thash
+          @event.attributes["content"].should eq(thash.to_json)
+        end
+        it "stores strings as strings" do
+          tstring = "lucky"
+          @event.content = tstring
+          @event.attributes["content"].should eq(tstring)
+        end
+      end
     end
   end
 end
