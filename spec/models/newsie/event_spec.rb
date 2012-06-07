@@ -9,6 +9,9 @@ module Newsie
     context "class methods" do
 
       context "find" do
+        before(:each) { @event = FactoryGirl.create(:event, :name => "your_event") }
+        it { Event.find("your_event").should eq(@event) }
+        it { Event.find(@event.id).should eq(@event) }
         # before(:each) { 3.times { |t| @event = FactoryGirl.create(:event, :name => "your_event") } }
         # it { Event.find("your_event").length.should eq(3) }
         # it { Event.find(@event.id).should eq([@event]) }
