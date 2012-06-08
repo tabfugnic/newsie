@@ -74,6 +74,16 @@ module Newsie
           @event.content = tstring
           @event.attributes["content"].should eq(tstring)
         end
+        it "returns content as hash" do
+          thash = {:some_object => "content", :no_way => "lucky"}
+          @event.attributes["content"] = thash.to_json
+          @event.content.should eq(thash)
+        end
+        it "returns content as string" do
+          tstring = "lucky"
+          @event.attributes["content"] = tstring
+          @event.content = tstring
+        end
       end
     end
   end
