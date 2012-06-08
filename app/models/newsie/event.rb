@@ -41,5 +41,6 @@ module Newsie
       start_date <= Time.now and end_date >= Time.now
     end
 
+   
   end
 end
